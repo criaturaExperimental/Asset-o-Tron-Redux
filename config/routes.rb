@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  resources :projects do
+    resources :my_assets
+  end
+
+  root 'projects#index'
 
 end
