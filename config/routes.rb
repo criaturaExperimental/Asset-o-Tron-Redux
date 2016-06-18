@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :teams
   devise_for :users
   resources :projects do
     resources :my_assets
