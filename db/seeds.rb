@@ -41,3 +41,11 @@ end
   project = create_project
   3.times do; project.my_assets << assets.pop; end
 end
+
+Project.all.each_with_index do |project, i|
+  if i%2 == 0
+    t1.projects << project
+  else
+    t2.projects << project
+  end
+end
