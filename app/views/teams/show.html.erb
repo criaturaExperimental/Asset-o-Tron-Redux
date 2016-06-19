@@ -6,14 +6,16 @@
 </p>
 
 <p>
-  <strong>Project:</strong>
-  <%= @team.project %>
+  <strong>Members</strong>
+  <ul>
+    <% @team.users.each do |user| %>
+    <li>
+        <%= user.username %>
+    </li>
+    <% end %>
+  </ul>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @team.user %>
-</p>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

@@ -1,39 +1,43 @@
-User.destroy_all
-Project.destroy_all
-Team.destroy_all
-MyAsset.destroy_all
+require 'database_cleaner'
 
-u1 = User.create! email: 'test@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u2 = User.create! email: 'test1@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u3 = User.create! email: 'test2@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u4 = User.create! email: 'test3@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u5 = User.create! email: 'test4@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u6 = User.create! email: 'test5@example.com', password: 'valid_password', password_confirmation:'valid_password'
-u7 = User.create! email: 'test6@example.com', password: 'valid_password', password_confirmation:'valid_password'
+DatabaseCleaner.clean_with :truncation
 
-p1 = Project.create! name: "Arcadia"
-p2 = Project.create! name: "Agartha"
-p3 = Project.create! name: "Annwn"
-p4 = Project.create! name: "Atlantis"
-p5 = Project.create! name: "Avalon"
+def create_user(email = Faker::Internet.email, username = Faker::Internet.user_name, lastName = Faker::Name.last_name)
+  pwd = '12345678'
+  puts "    #{username}"
+  User.create!(username: username, email: email, password: pwd, password_confirmation: pwd, lastName: lastName)
+end
 
-a1 = MyAsset.create! name: "Arondight"
-a2 = MyAsset.create! name: "Galatine"
-a3 = MyAsset.create! name: "Secace"
-a4 = MyAsset.create! name: "Gram"
-a5 = MyAsset.create! name: "Tizona"
-a6 = MyAsset.create! name: "Masamune"
-a7 = MyAsset.create! name: "Harpe"
-a8 = MyAsset.create! name: "Ascalon"
-a9 = MyAsset.create! name: "Longuinus"
-a10 = MyAsset.create! name: "Caduceus"
-a11 = MyAsset.create! name: "Parashu"
+def create_project(name = Faker::StarWars.planet)
+  puts "Project - #{name}"
+  Project.create! name: name
+end
+
+(1..10).each do
+  create_user
+end
 
 t1 = Team.create! name:"Delta"
 t2 = Team.create! name:"Bravo"
 
-p1.my_assets << a1 << a2 << a3
-p2.my_assets << a4 << a5
-p3.my_assets << a6 << a7 << a8
-p4.my_assets << a9
-p5.my_assets << a10 << a11
+User.all.each_with_index do |user, i|
+  if i%2 == 0
+    t1.users << user
+  else
+    t2.users << user
+  end
+end
+
+puts "Team1   ---   #{t1.name}", t1.users.pluck(:username)
+puts "Team2   ---   #{t2.name}", t2.users.pluck(:username)
+
+(1..60).each do
+  MyAsset.create! name: Faker::Hipster.word
+end
+
+  assets = MyAsset.all.to_a
+
+(1..20).each do
+  project = create_project
+  3.times do; project.my_assets << assets.pop; end
+end
