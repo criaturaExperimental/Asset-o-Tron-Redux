@@ -2,10 +2,12 @@ require 'database_cleaner'
 
 DatabaseCleaner.clean_with :truncation
 
-def create_user(email = Faker::Internet.email, username = Faker::Internet.user_name, lastName = Faker::Name.last_name)
+def create_user(email = Faker::Internet.email, username = Faker::Internet.user_name,
+  lastName = Faker::Name.last_name, firstName = Faker::Name.first_name, description = Faker::Hipster.paragraph(3),
+  web = Faker::Internet.url)
   pwd = '12345678'
   puts "    #{username}"
-  User.create!(username: username, email: email, password: pwd, password_confirmation: pwd, lastName: lastName)
+  User.create!(username: username, email: email, password: pwd, password_confirmation: pwd, firstName: firstName, lastName: lastName, description: description, web: web)
 end
 
 def create_project(name = Faker::StarWars.planet)

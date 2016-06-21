@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620084152) do
+ActiveRecord::Schema.define(version: 20160621101703) do
 
   create_table "my_assets", force: :cascade do |t|
     t.string   "name"
@@ -21,17 +21,6 @@ ActiveRecord::Schema.define(version: 20160620084152) do
   end
 
   add_index "my_assets", ["project_id"], name: "index_my_assets_on_project_id"
-
-  create_table "profiles", force: :cascade do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "username"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -44,14 +33,9 @@ ActiveRecord::Schema.define(version: 20160620084152) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "project_id"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "teams", ["project_id"], name: "index_teams_on_project_id"
-  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "teams_users", force: :cascade do |t|
     t.integer "team_id"
@@ -78,10 +62,7 @@ ActiveRecord::Schema.define(version: 20160620084152) do
     t.string   "firstName"
     t.string   "lastName"
     t.text     "description"
-    t.string   "twitter"
-    t.string   "linkedin"
-    t.string   "github"
-    t.string   "facebook"
+    t.string   "web"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
