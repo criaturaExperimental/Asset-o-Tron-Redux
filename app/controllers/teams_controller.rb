@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:create]
 
   # GET /teams
   # GET /teams.json
@@ -28,6 +29,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
+        @team.first.users << @admin
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -65,6 +67,10 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    def set_admin
+      @admin = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

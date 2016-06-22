@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
-## Custom
-# Devise for authentication
+# Custom
+## Devise for authentication
 gem 'devise'
+## Pagination
+gem 'will_paginate', '~> 3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

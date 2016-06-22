@@ -1,0 +1,26 @@
+<h1>Profile</h1>
+<p>Welcome <%= "#{current_user.firstName} #{current_user.lastName}" %>!</p>
+
+<%
+  team_count = current_user.teams.count
+%>
+
+<section>
+  <article>
+    <% unless team_count == 0 %>
+        <strong><%= pluralize(team_count, 'Team')%>:</strong>
+        <ul>
+          <% current_user.teams.each do |team| %>
+            <li>
+                <%= link_to team.name, team_url(team.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+      <p>
+        <%= link_to "Create a team", new_team_path %>
+        Join a team <%# TODO: add team request %>
+      </p>
+    <% end %>
+  </article>
+</section>
