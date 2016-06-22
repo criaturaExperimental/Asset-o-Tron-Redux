@@ -3,5 +3,8 @@
   <strong><%= @my_asset.name %></strong>
 </p>
 
+<%= render partial: "comments/comments", locals: {commentable: @my_asset} %>
+<%= render partial: "comments/form", locals: {commentable: @my_asset} %>
+
 <%= link_to 'Edit', edit_project_my_asset_path(@project, @my_asset) %> |
 <%= link_to 'Back', @project %>

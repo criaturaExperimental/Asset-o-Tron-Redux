@@ -23,5 +23,9 @@
   </tbody>
 </table>
 
+<%= render partial: "comments/comments", locals: {commentable: @project} %>
+<%= render partial: "comments/form", locals: {commentable: @project} %>
+
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

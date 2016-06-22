@@ -27,6 +27,9 @@
   </ul>
 </p>
 
+<%= render partial: "comments/comments", locals: {commentable: @team} %>
+<%= render partial: "comments/form", locals: {commentable: @team} %>
+
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

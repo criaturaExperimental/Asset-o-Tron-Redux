@@ -6,7 +6,7 @@ Manage your company creative team collaborative projects
 
 ## Tech feat.
 - User authorization (devise)
-- Comments
+- Comments (Using polymorphic and partials)
 - Tagging
 - Team management
 - Assets management
