@@ -2,6 +2,9 @@
 
 <ul>
   <% commentable.comments.each do |comment| %>
-    <li><%= comment.body %></li>
+  <li>
+    <strong><%= "#{comment.user.username} said:" %> </strong>
+    <p><%= comment.body %></p>
+  </li>
   <% end %>
 </ul>

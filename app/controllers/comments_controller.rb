@@ -3,8 +3,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new comment_params
-    @comment.user_id = current_user.id
+    @comment.user = current_user
     @comment.save
+    next_page
+  end
+
+  def next_page
     redirect_to @commentable, notice: "Comment successfully posted"
   end
 
@@ -13,4 +17,5 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:body)
     end
+
 end
