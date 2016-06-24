@@ -33,13 +33,15 @@ end
 puts "Team1   ---   #{t1.name}", t1.users.pluck(:username)
 puts "Team2   ---   #{t2.name}", t2.users.pluck(:username)
 
-(1..60).each do
+projects = 20
+
+(1..projects*3).each do
   MyAsset.create! name: Faker::Hipster.word
 end
 
   assets = MyAsset.all.to_a
 
-(1..20).each do
+(1..projects).each do
   project = create_project
   3.times do; project.my_assets << assets.pop; end
 end
